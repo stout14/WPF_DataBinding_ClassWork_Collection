@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,26 @@ namespace WPF_DataBinding_ClassWork_Collection
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ObservableCollection<Person> _person;
+
         public MainWindow()
         {
             InitializeComponent();
+            _person = new ObservableCollection<Person>
+            {
+                new Person{Name="Bart", Age=10},
+                new Person{Name="Homer", Age=45},
+                new Person{Name="Marge", Age=35},
+                new Person{Name="Lisa", Age=12},
+                new Person{Name="Maggie", Age=1},
+            };
+            _list.ItemsSource = _person;
+        }
+
+
+        private void OnAdd_click(object sender, RoutedEventArgs e)
+        {
+            _person.Add(new Person { Name = "Moe", Age = 40 });
         }
     }
 }
